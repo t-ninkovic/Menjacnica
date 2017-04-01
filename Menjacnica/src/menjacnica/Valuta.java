@@ -12,36 +12,44 @@ public class Valuta {
 		return naziv;
 	}
 	public void setNaziv(String naziv) {
+		if (naziv == null || naziv.equals("")) 
+			throw new RuntimeException("Null ili prazan string. Naziv nije unet");
 		this.naziv = naziv;
 	}
 	public String getSkraceni() {
 		return skraceni;
 	}
 	public void setSkraceni(String skraceni) {
+		if (skraceni == null || skraceni.equals(""))
+			throw new RuntimeException("Null ili prazan string. Skraceni naziv nije unet");
 		this.skraceni = skraceni;
 	}
 	public double getProdajni() {
 		return prodajni;
 	}
 	public void setProdajni(double prodajni) {
+		if (prodajni <= 0) throw new RuntimeException("Kurs mora biti veci od 0");
 		this.prodajni = prodajni;
 	}
 	public double getKupovni() {
 		return kupovni;
 	}
 	public void setKupovni(double kupovni) {
+		if (kupovni <= 0)  throw new RuntimeException("Kurs mora biti veci od 0");
 		this.kupovni = kupovni;
 	}
 	public double getSrednji() {
 		return srednji;
 	}
 	public void setSrednji(double srednji) {
+		if (srednji <= 0)  throw new RuntimeException("Kurs mora biti veci od 0");
 		this.srednji = srednji;
 	}
 	public GregorianCalendar getDatum() {
 		return datum;
 	}
 	public void setDatum(GregorianCalendar datum) {
+		if (datum == null) throw new RuntimeException("Datum je null");
 		this.datum = datum;
 	}
 	
