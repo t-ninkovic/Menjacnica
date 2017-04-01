@@ -11,8 +11,10 @@ public class Menjacnica implements MenjacnicaInterfejs {
 	@Override
 	public void dodajKurs(String naziv, String skraceni, double prodajni, double kupovni, double srednji,
 			GregorianCalendar datum) {
+
 		if (naziv == null || skraceni == null || prodajni <= 0 || kupovni <= 0 || srednji <= 0 || datum == null)
 			throw new RuntimeException("Neki od parametara nije ispravno unet");
+
 		Valuta v = new Valuta();
 		v.setNaziv(naziv);
 		v.setSkraceni(skraceni);
@@ -25,14 +27,28 @@ public class Menjacnica implements MenjacnicaInterfejs {
 
 	@Override
 	public void obrisiKurs(String naziv, GregorianCalendar datum) {
-		// TODO Auto-generated method stub
-
+		if (listaKurseva.isEmpty()) 
+			throw new RuntimeException("Lista je prazna");
+		for (int i=0; i < listaKurseva.size(); i++) {
+			if (listaKurseva.get(i).getNaziv().equals(naziv) && listaKurseva.get(i).getDatum() == datum)
+				listaKurseva.remove(i);
+		}
 	}
 
 	@Override
 	public double[] pronadjiKurs(String naziv, GregorianCalendar datum) {
-		// TODO Auto-generated method stub
-		return null;
+		double[] nizKurseva = new double[3];
+		if (listaKurseva.isEmpty()) throw new RuntimeException("Lista je prazna");
+		for (int i=0; i < listaKurseva.size(); i++) {
+			if (listaKurseva.get(i).getNaziv().equals(naziv) && listaKurseva.get(i).getDatum() == datum) {
+				nizKurseva[0] = listaKurseva.get(i).getProdajni();
+				nizKurseva[1] = listaKurseva.get(i).getKupovni();
+				nizKurseva[2] = listaKurseva.get(i).getSrednji();
+				break;
+			}
+		}
+		
+		return nizKurseva;
 	}
 
 }
