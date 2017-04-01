@@ -44,5 +44,45 @@ public class Valuta {
 	public void setDatum(GregorianCalendar datum) {
 		this.datum = datum;
 	}
+	
+	@Override
+	public String toString() {
+		return "Valuta: \n naziv =" + getNaziv() + "\n skraceni naziv =" + getSkraceni() + "\n prodajni kurs =" + getProdajni() + 
+				"\n kupovni kurs =" + getKupovni() + "\n srednji kurs =" + getSrednji();
+	}
+	
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((datum == null) ? 0 : datum.hashCode());
+		long temp;
+		temp = Double.doubleToLongBits(kupovni);
+		result = prime * result + (int) (temp ^ (temp >>> 32));
+		result = prime * result + ((naziv == null) ? 0 : naziv.hashCode());
+		temp = Double.doubleToLongBits(prodajni);
+		result = prime * result + (int) (temp ^ (temp >>> 32));
+		result = prime * result + ((skraceni == null) ? 0 : skraceni.hashCode());
+		temp = Double.doubleToLongBits(srednji);
+		result = prime * result + (int) (temp ^ (temp >>> 32));
+		return result;
+	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (!(obj instanceof Valuta))
+			return false;
+		
+		Valuta v = (Valuta) obj;
+		if (getNaziv().equals(v.getNaziv()) && getSkraceni().equals(v.getSkraceni()) && getProdajni() == v.getProdajni()
+				&& getKupovni() == v.getKupovni() && getSrednji() == v.getSrednji() && getDatum() == v.getDatum())
+			return true;
+		return false;
+	}
+	
 
 }
